@@ -1,80 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
-char T[8][8];
-void ciz(){
-    printf(" ");
-    for(int i=0;i<8;i++){
-        printf("%d ",i);
-    }
-
-      printf("\n");
-    for(int i=0;i<8;i++){
-            printf("%d",i);
-        for(int j=0;j<8;j++){
-            printf("%c ",T[i][j]);
-        }
-        printf("\n");
-       }
+#include <string.h>
+struct kitap {
+    char ad[50];
+    int basimyili;
+    char yazar[10];
+    float fiyat;
+}kitapdizisi[5] = {{"masumiyetmuzasi",1980,"orhan pamuk",23.5 },
+ {"kar",1985,"orhan pamuk",27.65},
+ {"sefiller",1890,"victor hugo",50.75},
+ {"ask",2005,"elif safak",32},
+ {"mavigozyasi",2002,"ahmet gunbay yildiz",19.5}};
 
 
-}
-
-
-void girisIste(){
-    char karakter;
-    int i,j;
-
-
-
-    printf("yazmak istediginiz karakteri giriniz...(S/O)");
-    scanf(" %c",&karakter);
-    printf("nereye yazmak istiyorsunuz...[?][?]");
-    scanf("%d%d",&i,&j);
-
-    if(T[i][j] != '*'){
-    printf("dolu alan !! \n");
-
-    printf("yazmak istediginiz karakteri giriniz...(S/O)");
-    scanf(" %c",&karakter);
-    printf("nereye yazmak istiyorsunuz...[?][?]");
-    scanf("%d%d",&i,&j);
-
-    }
-
-    T[i][j] = karakter;
-
-}
 int main()
 {
+    char kitapadi[20];
+    char cevap1 = 'E',cevap2;
+    int sayac1=0,sayac2=1;
+    float toplam=0;
 
-    int alan,a;
-    char cevap,karakter;
 
-    printf(" ");
+    while(cevap1=='E'){
 
-    for(int i=1;i<=8;i++){
-        printf("%d ",i);
-    }
-     for(int i=0;i<8;i++){
-        for(int j=0;j<8;j++){
-            T[i][j]='*';
-        }
-       }
-      printf("\n");
-    for(int i=0;i<8;i++){
-            printf("%d",i+1);
-        for(int j=0;j<8;j++){
-            printf("%c ",T[i][j]);
-        }
-        printf("\n");
-       }
 
-    while(1){
+        printf("almak istediginiz kitabi yaziniz...");
+    scanf("%s",kitapadi);
+   for(int i=0;i<5;i++){
+        if(strcmp(kitapadi,kitapdizisi[i].ad)==0){
+            printf("kitap bulundu...\n");
+            sayac1++;
+        }else{
+        sayac2++;}
+        if(sayac1==1) break;
 
-        girisIste();
-        ciz();
 
     }
+     printf("%d \n",sayac2);
+     printf("%s %d %s %f\n",kitapdizisi[sayac2-1].ad,kitapdizisi[sayac2-1].basimyili,kitapdizisi[sayac2-1].yazar,kitapdizisi[sayac2-1].fiyat);
+
+     printf("almak istiyor musunuz?...");
+     scanf(" %c",&cevap2);
+
+     if(cevap2 == 'E')
+    toplam += kitapdizisi[sayac2-1].fiyat;
+
+        printf("almaya devam etmek istiyor musunuz?..");
+        scanf(" %c",&cevap1);
+
+       sayac2 = 1;
+       sayac1 = 0;
+
+    }
+
+   printf("toplam fiyat : %f dir",toplam);
+
 
     return 0;
 }
+
